@@ -2,11 +2,17 @@ var bee = require("beeline");
 var http = require("http");
 var fs = require("fs");
 var nowjs = require("now");
-
+var brain = require("brain");
 
 var cache = {};
 cache['index'] = fs.readFileSync('./draw.html');
 cache['app'] = fs.readFileSync('./neurotype_draw.pde')
+
+var net = new brain.NeuralNetwork({
+   hiddenLayers: [4],
+   learningRate: 0.6
+});
+
 
 var router = bee.route({ // Create a new router
 	"/": function(req, res) {
